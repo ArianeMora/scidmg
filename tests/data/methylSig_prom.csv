@@ -1,0 +1,9 @@
+idx,seqnames,start,end,gene_idx,meth_diff,uid,pvalue,fdr,ensembl_gene_id,external_gene_name,chromosome_name,start_position,end_position,strand
+1,chr1,10,100,1,-0.6,dmr_1,0.001,0.01,ENSG00000278267,AC114488.2,chr1,1,30,-1
+2,chr1,123,190,2,-0.1,dmr_2,0.01,0.3,ENSG00000116273,PHF13,chrX,2,12,1
+3,chr1,3,200,3,0.8,dmr_3,0.01,0.01,ENSG00000249087,ZNF436-AS1,chr3,3,431,1
+4,chr1,123,312,4,-0.1,dmr_4,0.01,0.01,ENSG00000278267,AC114488.2,chr1,1,231,1
+5,chr1,123,190,2,-0.1,dmr_5,0.01,0.001,ENSG00000116273,HOXA1,chr4,2,12,1
+6,chr1,123,190,2,0.3,dmr_6,0.01,0.01,ENSG00000116273,HOXA1,chr4,2,12,1
+7,chr1,123,190,2,-0.2,dmr_7,0.01,0.01,ENSG00000116273,HOXB9,chr8,2,12,1
+3,chr1,3,200,3,-0.9,dmr_10,0.01,0.01,ENSG00000249087,ZNF436-AS1,chr3,3,431,1
