@@ -1,0 +1,339 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#  Notebook\n",
+    "## Example merging DMCs and DMRs\n",
+    "\n",
+    "This notebook provides an example on merging files from Methylkit (DMC's) and DMRs from Methylsig.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {
+    "pycharm": {
+     "name": "#%%\n"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "import pandas as pd\n",
+    "from sciutil import SciUtil\n",
+    "from scidmg import SciDMG\n",
+    "import os\n",
+    "data_dir = f'{os.path.dirname(os.path.realpath(\".\"))}/../../tests/data/'\n",
+    "dmr_file = f'{data_dir}methylSig_prom.csv'\n",
+    "dmc_file = f'{data_dir}methylKit_DMC.csv'\n",
+    "percent_meth_file = f'{data_dir}methylKit_percentMeth.csv'\n",
+    "\n",
+    "u = SciUtil()\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Inspect files\n",
+    "\n",
+    "Just to give you an idea of what the files as input are we print out the head of each input file.\n",
+    "\n",
+    "Note that each file has the same column name for the gene symbol **external_gene_name**. This will be used to merge the files.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {
+    "pycharm": {
+     "name": "#%%\n"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[94m                               DMR file header:\t                                \u001b[0m\n",
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "   idx seqnames  start  end  gene_idx  meth_diff     uid  pvalue    fdr  \\\n",
+      "0    1     chr1     10  100         1       -0.6   dmr_1   0.001  0.010   \n",
+      "1    2     chr1    123  190         2       -0.1   dmr_2   0.010  0.300   \n",
+      "2    3     chr1      3  200         3        0.8   dmr_3   0.010  0.010   \n",
+      "3    4     chr1    123  312         4       -0.1   dmr_4   0.010  0.010   \n",
+      "4    5     chr1    123  190         2       -0.1   dmr_5   0.010  0.001   \n",
+      "5    6     chr1    123  190         2        0.3   dmr_6   0.010  0.010   \n",
+      "6    7     chr1    123  190         2       -0.2   dmr_7   0.010  0.010   \n",
+      "7    3     chr1      3  200         3       -0.9  dmr_10   0.010  0.010   \n",
+      "\n",
+      "   ensembl_gene_id external_gene_name chromosome_name  start_position  \\\n",
+      "0  ENSG00000278267         AC114488.2            chr1               1   \n",
+      "1  ENSG00000116273              PHF13            chrX               2   \n",
+      "2  ENSG00000249087         ZNF436-AS1            chr3               3   \n",
+      "3  ENSG00000278267         AC114488.2            chr1               1   \n",
+      "4  ENSG00000116273              HOXA1            chr4               2   \n",
+      "5  ENSG00000116273              HOXA1            chr4               2   \n",
+      "6  ENSG00000116273              HOXB9            chr8               2   \n",
+      "7  ENSG00000249087         ZNF436-AS1            chr3               3   \n",
+      "\n",
+      "   end_position  strand  \n",
+      "0            30      -1  \n",
+      "1            12       1  \n",
+      "2           431       1  \n",
+      "3           231       1  \n",
+      "4            12       1  \n",
+      "5            12       1  \n",
+      "6            12       1  \n",
+      "7           431       1  \n",
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[94m                               DMC file header:\t                                \u001b[0m\n",
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "   idx   chr  start  end  gene_idx  meth.diff     uid  pvalue  qvalue  \\\n",
+      "0    1  chr1      1    1         1       -0.6   dmc_1   0.001   0.010   \n",
+      "1    2  chrX      1    1         2       -0.1   dmc_2   0.010   0.300   \n",
+      "2    3  chr3      1    1         3        0.1   dmc_3   0.010   0.010   \n",
+      "3    4  chr1      1    1         4       -0.1   dmc_4   0.010   0.010   \n",
+      "4    5  chr1      1    1         5       -0.3   dmc_5   0.010   0.010   \n",
+      "5    6  chr1      1    1         6        0.0   dmc_6   0.010   0.010   \n",
+      "6    7  chr1      1    1         7        2.0   dmc_7   0.010   0.010   \n",
+      "7    5  chr1      1    1         9       -0.1   dmc_8   0.010   0.001   \n",
+      "8    3  chr3      1    1         3       -0.7  dmc_10   0.010   0.010   \n",
+      "\n",
+      "   ensembl_gene_id external_gene_name chromosome_name  start_position  \\\n",
+      "0  ENSG00000278267         AC114488.2            chr1               1   \n",
+      "1  ENSG00000116273              PHF13            chrX               2   \n",
+      "2  ENSG00000249087         ZNF436-AS1            chr3               3   \n",
+      "3  ENSG00000278267         AC114488.2            chr1               1   \n",
+      "4  ENSG00000278267         AC114488.2            chr1               2   \n",
+      "5  ENSG00000278267         AC114488.2            chr1               3   \n",
+      "6  ENSG00000278267         AC114488.2            chr1               4   \n",
+      "7  ENSG00000116273              HOXA1            chr4               2   \n",
+      "8  ENSG00000249087         ZNF436-AS1            chr3               3   \n",
+      "\n",
+      "   end_position  strand  \n",
+      "0             1      -1  \n",
+      "1             2       1  \n",
+      "2             3       1  \n",
+      "3             1       1  \n",
+      "4             3       1  \n",
+      "5             3       1  \n",
+      "6             4       1  \n",
+      "7            12       1  \n",
+      "8             3       1  \n",
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[94m                      Percentage methylation file header:\t                      \u001b[0m\n",
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "   idx   chr  start  end  gene_idx     uid  WT_1  WT_2  WT_3  KO_1  KO_2  \\\n",
+      "0    1  chr1      1    1         1   dmc_1  0.33  0.18  0.53  0.11  0.59   \n",
+      "1    2  chrX      1    1         2   dmc_2  0.12  0.47  0.22  0.12  0.42   \n",
+      "2    3  chr3      1    1         3   dmc_3  0.06  0.21  0.43  0.04  0.39   \n",
+      "3    4  chr1      1    1         4   dmc_4  0.72  0.75  0.11  0.76  0.17   \n",
+      "4    5  chr1      1    1         5   dmc_5  0.91  0.11  0.24  0.12  0.49   \n",
+      "5    6  chr1      1    1         6   dmc_6  0.75  0.84  0.59  0.33  0.44   \n",
+      "6    7  chr1      1    1         7   dmc_7  0.98  0.90  0.64  0.18  0.06   \n",
+      "7    7  chr1      1    1         7   dmc_8  0.98  0.90  0.64  0.18  0.06   \n",
+      "8    3  chr3      1    1         3  dmc_10  0.06  0.21  0.43  0.04  0.39   \n",
+      "\n",
+      "   KO_3  ensembl_gene_id external_gene_name chromosome_name  start_position  \\\n",
+      "0  0.50  ENSG00000278267         AC114488.2            chr1               1   \n",
+      "1  0.86  ENSG00000116273              PHF13            chrX               2   \n",
+      "2  0.25  ENSG00000249087         ZNF436-AS1            chr3               3   \n",
+      "3  0.89  ENSG00000278267         AC114488.2            chr1               1   \n",
+      "4  0.23  ENSG00000278267         AC114488.2            chr1               2   \n",
+      "5  0.73  ENSG00000278267         AC114488.2            chr1               3   \n",
+      "6  0.51  ENSG00000278267         AC114488.2            chr1               4   \n",
+      "7  0.51  ENSG00000116273              HOXA1            chr4               2   \n",
+      "8  0.25  ENSG00000249087         ZNF436-AS1            chr3               3   \n",
+      "\n",
+      "   end_position  strand  \n",
+      "0             1      -1  \n",
+      "1             2       1  \n",
+      "2             3       1  \n",
+      "3             1       1  \n",
+      "4             3       1  \n",
+      "5             3       1  \n",
+      "6             4       1  \n",
+      "7            12       1  \n",
+      "8             3       1  \n"
+     ]
+    }
+   ],
+   "source": [
+    "u.dp(['DMR file header:'])\n",
+    "print(pd.read_csv(dmr_file))\n",
+    "\n",
+    "u.dp(['DMC file header:'])\n",
+    "print(pd.read_csv(dmc_file))\n",
+    "\n",
+    "u.dp(['Percentage methylation file header:'])\n",
+    "print(pd.read_csv(percent_meth_file))\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Override the default parameters\n",
+    "\n",
+    "Here we just show how some of the parameters can be overridden.\n",
+    "\n",
+    "For example, we have made this a bit stricter than the defaults and required a cutoff for DMC's of 0.05.\n",
+    "\n",
+    "We also make the DMRs have at least 70% of DMCs in agreement of direction.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\u001b[93m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[93m              Please run dmg.run() before plotting the volcanos.\t               \u001b[0m\n",
+      "\u001b[93m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[93m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[93m              Please run dmg.run() before plotting the volcanos.\t               \u001b[0m\n",
+      "\u001b[93m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[93m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[93mWARNING: Running merge_dmc_perc_meth which assumes that you have run the DMC analysis using MethylKit.\t\u001b[0m\n",
+      "\u001b[93m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[94m                  Length of all merged methylation data: \t16\t                   \u001b[0m\n",
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[94m            Length of merged methylation data grouped by region: \t6\t            \u001b[0m\n",
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[94m                Number of CpGs to keep based on the regions: \t2\t                \u001b[0m\n",
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[94mLength of filtered methylation dataframe: \t3\t\n",
+      "Number of genes with Methylation:\t2\t\u001b[0m\n",
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[94m                 Dropping any genes with disagreeing DMRs: \t0\t                  \u001b[0m\n",
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[94m     Length of dataframe filtered to only keep top DMC mapped to genes:\t2\t      \u001b[0m\n",
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[94m                               Printing stats: \t                                \u001b[0m\n",
+      "\u001b[94m--------------------------------------------------------------------------------\u001b[0m\n",
+      "Length grouped by DMRs 6\n",
+      "Number of CpGs to keep from grouped DMRs 2\n",
+      "Length of merged DMR and DMC 16\n",
+      "Length grouped by Genes 2\n",
+      "Number of Genes with DMRs that disagree in direction 0\n"
+     ]
+    }
+   ],
+   "source": [
+    "dmg = SciDMG(dmr_file, percent_meth_file, dmc_file,\n",
+    "           dmc_methdiff=\"meth.diff\", dmc_padj=\"qvalue\", dmc_uid=\"uid\", dmc_padj_cutoff=0.05,\n",
+    "           dmr_methdiff=\"meth_diff\", dmr_padj=\"fdr\", dmr_uid=\"uid\", dmr_padj_cutoff=0.1,\n",
+    "            min_perc_agreement=0.7, min_meth_diff=0.1, plot=True\n",
+    "        )\n",
+    "dmg.run()\n",
+    "dmg.print_stats()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Plot volcanos\n",
+    "\n",
+    "We may want to inspect our files as well, so we can plkot a volcano of the DMcs and the DMRs."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {
+    "pycharm": {
+     "name": "#%%\n"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\u001b[93m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[93mNo offset was provided, setting offset to be smallest value recorded in dataset: \t0.01\t\u001b[0m\n",
+      "\u001b[93m--------------------------------------------------------------------------------\u001b[0m\n"
+     ]
+    },
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 216x216 with 1 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\u001b[93m--------------------------------------------------------------------------------\u001b[0m\n",
+      "\u001b[93mNo offset was provided, setting offset to be smallest value recorded in dataset: \t0.01\t\u001b[0m\n",
+      "\u001b[93m--------------------------------------------------------------------------------\u001b[0m\n"
+     ]
+    },
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 216x216 with 1 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "dmg.plot_dmc_volcano()\n",
+    "dmg.plot_dmr_volcano()\n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.2"
+  },
+  "pycharm": {
+   "stem_cell": {
+    "cell_type": "raw",
+    "metadata": {
+     "collapsed": false
+    },
+    "source": []
+   }
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 1
+}

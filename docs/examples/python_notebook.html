@@ -1,0 +1,770 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Notebook &mdash; scidmg 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/custom.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CLI" href="cli.html" />
+    <link rel="prev" title="Installing sci-dmg" href="../installing/index.html" />
+ 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">sci-dmg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installing sci-dmg</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Running sci-dmg</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Notebook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Example-merging-DMCs-and-DMRs">Example merging DMCs and DMRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Inspect-files">Inspect files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Override-the-default-parameters">Override the default parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Plot-volcanos">Plot volcanos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
+</ul>
+<p class="caption"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">scidmg</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Notebook</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/arianemora/scidmg/blob/master/docs_src/src/examples/python_notebook.ipynb" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container,
+div.nbinput.container div.prompt,
+div.nbinput.container div.input_area,
+div.nbinput.container div[class*=highlight],
+div.nbinput.container div[class*=highlight] pre,
+div.nboutput.container,
+div.nboutput.container div.prompt,
+div.nboutput.container div.output_area,
+div.nboutput.container div[class*=highlight],
+div.nboutput.container div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="Notebook">
+<h1>Notebook<a class="headerlink" href="#Notebook" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Example-merging-DMCs-and-DMRs">
+<h2>Example merging DMCs and DMRs<a class="headerlink" href="#Example-merging-DMCs-and-DMRs" title="Permalink to this headline">¶</a></h2>
+<p>This notebook provides an example on merging files from Methylkit (DMC’s) and DMRs from Methylsig.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sciutil</span> <span class="kn">import</span> <span class="n">SciUtil</span>
+<span class="kn">from</span> <span class="nn">scidmg</span> <span class="kn">import</span> <span class="n">SciDMG</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">))</span><span class="si">}</span><span class="s1">/../../tests/data/&#39;</span>
+<span class="n">dmr_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s1">methylSig_prom.csv&#39;</span>
+<span class="n">dmc_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s1">methylKit_DMC.csv&#39;</span>
+<span class="n">percent_meth_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s1">methylKit_percentMeth.csv&#39;</span>
+
+<span class="n">u</span> <span class="o">=</span> <span class="n">SciUtil</span><span class="p">()</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Inspect-files">
+<h2>Inspect files<a class="headerlink" href="#Inspect-files" title="Permalink to this headline">¶</a></h2>
+<p>Just to give you an idea of what the files as input are we print out the head of each input file.</p>
+<p>Note that each file has the same column name for the gene symbol <strong>external_gene_name</strong>. This will be used to merge the files.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">u</span><span class="o">.</span><span class="n">dp</span><span class="p">([</span><span class="s1">&#39;DMR file header:&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">dmr_file</span><span class="p">))</span>
+
+<span class="n">u</span><span class="o">.</span><span class="n">dp</span><span class="p">([</span><span class="s1">&#39;DMC file header:&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">dmc_file</span><span class="p">))</span>
+
+<span class="n">u</span><span class="o">.</span><span class="n">dp</span><span class="p">([</span><span class="s1">&#39;Percentage methylation file header:&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">percent_meth_file</span><span class="p">))</span>
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-blue-intense-fg">                               DMR file header:                                      </span>
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+   idx seqnames  start  end  gene_idx  meth_diff     uid  pvalue    fdr  \
+0    1     chr1     10  100         1       -0.6   dmr_1   0.001  0.010
+1    2     chr1    123  190         2       -0.1   dmr_2   0.010  0.300
+2    3     chr1      3  200         3        0.8   dmr_3   0.010  0.010
+3    4     chr1    123  312         4       -0.1   dmr_4   0.010  0.010
+4    5     chr1    123  190         2       -0.1   dmr_5   0.010  0.001
+5    6     chr1    123  190         2        0.3   dmr_6   0.010  0.010
+6    7     chr1    123  190         2       -0.2   dmr_7   0.010  0.010
+7    3     chr1      3  200         3       -0.9  dmr_10   0.010  0.010
+
+   ensembl_gene_id external_gene_name chromosome_name  start_position  \
+0  ENSG00000278267         AC114488.2            chr1               1
+1  ENSG00000116273              PHF13            chrX               2
+2  ENSG00000249087         ZNF436-AS1            chr3               3
+3  ENSG00000278267         AC114488.2            chr1               1
+4  ENSG00000116273              HOXA1            chr4               2
+5  ENSG00000116273              HOXA1            chr4               2
+6  ENSG00000116273              HOXB9            chr8               2
+7  ENSG00000249087         ZNF436-AS1            chr3               3
+
+   end_position  strand
+0            30      -1
+1            12       1
+2           431       1
+3           231       1
+4            12       1
+5            12       1
+6            12       1
+7           431       1
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-blue-intense-fg">                               DMC file header:                                      </span>
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+   idx   chr  start  end  gene_idx  meth.diff     uid  pvalue  qvalue  \
+0    1  chr1      1    1         1       -0.6   dmc_1   0.001   0.010
+1    2  chrX      1    1         2       -0.1   dmc_2   0.010   0.300
+2    3  chr3      1    1         3        0.1   dmc_3   0.010   0.010
+3    4  chr1      1    1         4       -0.1   dmc_4   0.010   0.010
+4    5  chr1      1    1         5       -0.3   dmc_5   0.010   0.010
+5    6  chr1      1    1         6        0.0   dmc_6   0.010   0.010
+6    7  chr1      1    1         7        2.0   dmc_7   0.010   0.010
+7    5  chr1      1    1         9       -0.1   dmc_8   0.010   0.001
+8    3  chr3      1    1         3       -0.7  dmc_10   0.010   0.010
+
+   ensembl_gene_id external_gene_name chromosome_name  start_position  \
+0  ENSG00000278267         AC114488.2            chr1               1
+1  ENSG00000116273              PHF13            chrX               2
+2  ENSG00000249087         ZNF436-AS1            chr3               3
+3  ENSG00000278267         AC114488.2            chr1               1
+4  ENSG00000278267         AC114488.2            chr1               2
+5  ENSG00000278267         AC114488.2            chr1               3
+6  ENSG00000278267         AC114488.2            chr1               4
+7  ENSG00000116273              HOXA1            chr4               2
+8  ENSG00000249087         ZNF436-AS1            chr3               3
+
+   end_position  strand
+0             1      -1
+1             2       1
+2             3       1
+3             1       1
+4             3       1
+5             3       1
+6             4       1
+7            12       1
+8             3       1
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-blue-intense-fg">                      Percentage methylation file header:                          </span>
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+   idx   chr  start  end  gene_idx     uid  WT_1  WT_2  WT_3  KO_1  KO_2  \
+0    1  chr1      1    1         1   dmc_1  0.33  0.18  0.53  0.11  0.59
+1    2  chrX      1    1         2   dmc_2  0.12  0.47  0.22  0.12  0.42
+2    3  chr3      1    1         3   dmc_3  0.06  0.21  0.43  0.04  0.39
+3    4  chr1      1    1         4   dmc_4  0.72  0.75  0.11  0.76  0.17
+4    5  chr1      1    1         5   dmc_5  0.91  0.11  0.24  0.12  0.49
+5    6  chr1      1    1         6   dmc_6  0.75  0.84  0.59  0.33  0.44
+6    7  chr1      1    1         7   dmc_7  0.98  0.90  0.64  0.18  0.06
+7    7  chr1      1    1         7   dmc_8  0.98  0.90  0.64  0.18  0.06
+8    3  chr3      1    1         3  dmc_10  0.06  0.21  0.43  0.04  0.39
+
+   KO_3  ensembl_gene_id external_gene_name chromosome_name  start_position  \
+0  0.50  ENSG00000278267         AC114488.2            chr1               1
+1  0.86  ENSG00000116273              PHF13            chrX               2
+2  0.25  ENSG00000249087         ZNF436-AS1            chr3               3
+3  0.89  ENSG00000278267         AC114488.2            chr1               1
+4  0.23  ENSG00000278267         AC114488.2            chr1               2
+5  0.73  ENSG00000278267         AC114488.2            chr1               3
+6  0.51  ENSG00000278267         AC114488.2            chr1               4
+7  0.51  ENSG00000116273              HOXA1            chr4               2
+8  0.25  ENSG00000249087         ZNF436-AS1            chr3               3
+
+   end_position  strand
+0             1      -1
+1             2       1
+2             3       1
+3             1       1
+4             3       1
+5             3       1
+6             4       1
+7            12       1
+8             3       1
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Override-the-default-parameters">
+<h2>Override the default parameters<a class="headerlink" href="#Override-the-default-parameters" title="Permalink to this headline">¶</a></h2>
+<p>Here we just show how some of the parameters can be overridden.</p>
+<p>For example, we have made this a bit stricter than the defaults and required a cutoff for DMC’s of 0.05.</p>
+<p>We also make the DMRs have at least 70% of DMCs in agreement of direction.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">dmg</span> <span class="o">=</span> <span class="n">SciDMG</span><span class="p">(</span><span class="n">dmr_file</span><span class="p">,</span> <span class="n">percent_meth_file</span><span class="p">,</span> <span class="n">dmc_file</span><span class="p">,</span>
+           <span class="n">dmc_methdiff</span><span class="o">=</span><span class="s2">&quot;meth.diff&quot;</span><span class="p">,</span> <span class="n">dmc_padj</span><span class="o">=</span><span class="s2">&quot;qvalue&quot;</span><span class="p">,</span> <span class="n">dmc_uid</span><span class="o">=</span><span class="s2">&quot;uid&quot;</span><span class="p">,</span> <span class="n">dmc_padj_cutoff</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+           <span class="n">dmr_methdiff</span><span class="o">=</span><span class="s2">&quot;meth_diff&quot;</span><span class="p">,</span> <span class="n">dmr_padj</span><span class="o">=</span><span class="s2">&quot;fdr&quot;</span><span class="p">,</span> <span class="n">dmr_uid</span><span class="o">=</span><span class="s2">&quot;uid&quot;</span><span class="p">,</span> <span class="n">dmr_padj_cutoff</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+            <span class="n">min_perc_agreement</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">min_meth_diff</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+<span class="n">dmg</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">dmg</span><span class="o">.</span><span class="n">print_stats</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-yellow-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-yellow-intense-fg">              Please run dmg.run() before plotting the volcanos.                  </span>
+<span class="ansi-yellow-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-yellow-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-yellow-intense-fg">              Please run dmg.run() before plotting the volcanos.                  </span>
+<span class="ansi-yellow-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-yellow-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-yellow-intense-fg">WARNING: Running merge_dmc_perc_meth which assumes that you have run the DMC analysis using MethylKit.     </span>
+<span class="ansi-yellow-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-blue-intense-fg">                  Length of all merged methylation data:     16                         </span>
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-blue-intense-fg">            Length of merged methylation data grouped by region:     6                   </span>
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-blue-intense-fg">                Number of CpGs to keep based on the regions:         2                       </span>
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-blue-intense-fg">Length of filtered methylation dataframe:    3
+Number of genes with Methylation:       2       </span>
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-blue-intense-fg">                 Dropping any genes with disagreeing DMRs:   0                         </span>
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-blue-intense-fg">     Length of dataframe filtered to only keep top DMC mapped to genes:      2             </span>
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-blue-intense-fg">                               Printing stats:                                       </span>
+<span class="ansi-blue-intense-fg">--------------------------------------------------------------------------------</span>
+Length grouped by DMRs 6
+Number of CpGs to keep from grouped DMRs 2
+Length of merged DMR and DMC 16
+Length grouped by Genes 2
+Number of Genes with DMRs that disagree in direction 0
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Plot-volcanos">
+<h2>Plot volcanos<a class="headerlink" href="#Plot-volcanos" title="Permalink to this headline">¶</a></h2>
+<p>We may want to inspect our files as well, so we can plkot a volcano of the DMcs and the DMRs.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">dmg</span><span class="o">.</span><span class="n">plot_dmc_volcano</span><span class="p">()</span>
+<span class="n">dmg</span><span class="o">.</span><span class="n">plot_dmr_volcano</span><span class="p">()</span>
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-yellow-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-yellow-intense-fg">No offset was provided, setting offset to be smallest value recorded in dataset:   0.01    </span>
+<span class="ansi-yellow-intense-fg">--------------------------------------------------------------------------------</span>
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_python_notebook_7_1.png" src="../_images/examples_python_notebook_7_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-yellow-intense-fg">--------------------------------------------------------------------------------</span>
+<span class="ansi-yellow-intense-fg">No offset was provided, setting offset to be smallest value recorded in dataset:   0.01    </span>
+<span class="ansi-yellow-intense-fg">--------------------------------------------------------------------------------</span>
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_python_notebook_7_3.png" src="../_images/examples_python_notebook_7_3.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cli.html" class="btn btn-neutral float-right" title="CLI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../installing/index.html" class="btn btn-neutral float-left" title="Installing sci-dmg" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2021, Ariane Mora
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
