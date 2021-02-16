@@ -3,8 +3,7 @@ sci-dmg
 *******
 
 
-Sci-dmg aims to assign a change in DNA methylation (as calculated by an external tool) to genes in a consistent and
- unbiased manner.
+Sci-dmg aims to assign a change in DNA methylation (as calculated by an external tool) to genes in a consistent and **unbiased manner**.
 
 The user provides a DMR file, a file with the percentage of DNA Methylation, and also the DMCs. Using these, sci-DMG
 consolidates the DMR's and DMC's that are consistent. DMR regions (significant q <= 0.1) with at least 60% of DMCs

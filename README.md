@@ -1,7 +1,7 @@
 # sci-dmg
 [![codecov.io](https://codecov.io/github/ArianeMora/scidmg/coverage.svg?branch=main)](https://codecov.io/github/ArianeMora/scidmg?branch=main)
 [![PyPI](https://img.shields.io/pypi/v/scidmg)](https://pypi.org/project/scidmg/)
-[![DOI](https://zenodo.org/badge/316410924.svg)](https://zenodo.org/badge/latestdoi/316410924)
+[![DOI](https://zenodo.org/badge/316410924.svg)](https://zenodo.org/badge/latestdoi/339256167)
 
 [Link to docs](https://arianemora.github.io/scidmg/)
 
